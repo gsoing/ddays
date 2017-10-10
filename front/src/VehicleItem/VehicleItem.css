@@ -2,17 +2,29 @@
     background-color: #fff;
     border-radius: 3px;
     box-shadow: 0 0 5px 0 #e6e6ec; 
+    text-align: left;
+    width: 100%;
+}
+
+.VehicleItem__pictureBox {
+    position: relative;
+    padding-top: 75%;
+    width: 100%;         
 }
 
 .VehicleItem__picture {
+    position: absolute;
+    width: 100%;  
+    top: 0;
+}
 
+.VehicleItem__content {
+    padding: 8px;
 }
 
 .VehicleItem__title {
     display: block;
-    margin: 2rem;
-    font-size: 2.2rem;
-    font-weight: normal;
+    font-size: 1.8rem;
     color: #000;
     max-width: 100%;
     overflow: hidden;
@@ -20,24 +32,25 @@
     text-overflow: ellipsis;
     text-transform: uppercase;
     font-family: 'RenaultLife';
-    display: inline-block;
-    margin: 0;
+    margin: 0 0 4px;
 }
 
-.VehicleItem__subtitle {
+.VehicleItem__subtitle{
     font-family: 'RenaultLife';
+    font-size: 1.4rem;
+    margin: 0 0 8px;
 }
 
 .VehicleItem__infos {
-    margin: 2px;
+    margin: 0 0 8px;
     padding: 0;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 
 .VehicleItem__info {
     position: relative;
     display: inline-block;
-    padding: 0 4px;
+    padding: 0 8px;
     color: #777f91;
 }
 .VehicleItem__info::after {
@@ -47,7 +60,7 @@
     right: 0;
     width: 1px;
     height: 100%;
-    background: palette(neutral, medium);
+    background: #777f91;
 }
     
 .VehicleItem__info:first-of-type {
@@ -59,6 +72,20 @@
     padding-right: 0;
 }
 
-.VehicleItem__chooseButton {
+.VehicleItem__price {
+    flex: 1;
+    display: block;
+    font-size: 2.0rem;
+    font-weight: bold;
+    color: #ffce33;
+    white-space: nowrap;
+    margin: 0 0 8px;
+  }
 
+.VehicleItem__chooseButton {
+    width: 100%;
+    background-color: #ffce33;
+    font-size: 1.5rem;
+    border: none;
+    padding: 8px;
 }
