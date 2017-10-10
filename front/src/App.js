@@ -19,12 +19,15 @@ class App extends Component {
       vehicles: [],
       total: null,
       loading: true,
+      sessionId: Math.random().toString(36).substring(2, 15),
     };
   }
 
-  refreshVehicleListe = (lastAnswer) => {
+  refreshVehicleListe = (datas) => {
     const payload =  {
-      lastAnswer,
+      lastAnswer: datas.lastAnswer,
+      context: datas.context,
+      sessionId : this.state.sessionId,
       currentParams: this.state.currentParams,
     };
     this.setState({loading: true});
@@ -38,7 +41,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    this.refreshVehicleListe();
+    this.refreshVehicleListe({});
   }
 
   render() {
@@ -49,8 +52,8 @@ class App extends Component {
         <div className="Layout">
           <div className="Layout__ChatBot"><ChatBot handleNewAnswer={(a) => this.refreshVehicleListe(a)} /></div>
           <div className="Layout__ResultPage">
-            <ResultPage 
-              vehicles={vehicles} 
+            <ResultPage
+              vehicles={vehicles}
               currentParams={currentParams}
               loading={loading}
             />
