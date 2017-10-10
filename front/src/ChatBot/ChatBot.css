@@ -1,0 +1,28 @@
+.ChatBot {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.ChatBot__chat {
+  margin: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: calc(100% - 5Opx);
+}
+
+.ChatBot__form {
+  height: 50px;
+  width: 100%;
+}
+
+.ChatBot__input {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #e6e6ec;
+  height: 50px;
+  font:
+}
+
+

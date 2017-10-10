@@ -48,14 +48,25 @@ body {
 .Layout {
   display: flex;
   flex-direction: row;
+  height: calc(100vh - 60px);
+}
+
+@media (min-width: 670px) {
+  .Layout {
+    height: calc(100vh - 70px);
+  }
 }
 
 .Layout__ChatBot {
   width: 40%;
+  background-color: #f9f9fb;
+  border-right: 1px solid #e6e6ec;
 }
 
 .Layout__ResultPage {
   width: 60%;
+  padding: 32px;
+  overflow-y: scroll;
 }
 
 

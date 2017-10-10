@@ -3,10 +3,6 @@ import React from 'react';
 import './FunnelHeader.css';
 import mainLogo from '../img/mainLogo.svg';
 
-/**
- * Header content for the funnel
- * @param {string} title Header title
- */
 const FunnelHeader = ({ title }) => (
   <header className="FunnelHeader">
     <span className="FunnelHeader__title">{title}</span>

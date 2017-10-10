@@ -1,0 +1,58 @@
+.Bubble {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.Bubble__inner {
+  width: 45%;
+  background: #e6e6ec;
+  padding: 8px;
+  text-align: left;
+  position: relative;
+  border-radius: 4px 4px 4px 0px;
+}
+
+.Bubble--client .Bubble__inner {
+  color: #f1f5fa;
+  background: #0843a6;
+  margin-right: 0;
+  margin-left: auto;
+  border-radius: 4px 4px 0px 4px;
+}
+
+
+.Bubble__tick {
+  position: absolute;
+  border-bottom: 1px solid #e6e6ec;
+  z-index: 10;
+  bottom: -10px;
+  left: 14px;
+  right: auto;
+}
+
+.Bubble__tick::after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  right: -6px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 10px 10px 10px;
+  border-color: #e6e6ec transparent transparent #e6e6ec;
+}
+
+.Bubble--client .Bubble__inner .Bubble__tick {
+  right: 6px;
+  left: auto;
+}
+
+.Bubble--client .Bubble__inner .Bubble__tick {
+  border-bottom: 1px solid #0843a6;
+}
+
+.Bubble--client .Bubble__inner .Bubble__tick::after {
+  border-color: #0843a6 transparent transparent #0843a6;
+  transform: rotate(90deg);
+}
+
