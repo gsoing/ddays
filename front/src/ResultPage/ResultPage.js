@@ -9,7 +9,7 @@ const ResultPage = ({ vehicles, currentParams, loading }) => {
   const classNames = loading ? "ResultPage__wrapper ResultPage__wrapper--loading" : "ResultPage__wrapper";
   return (
     <div className="ResultPage">
-      { <Loader loading={loading} /> }
+      <Loader loading={loading} />
       <div className={classNames}>
         <Tags currentParams={currentParams} />
         <div className="ResultPage__list">
