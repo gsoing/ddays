@@ -44,3 +44,18 @@ body {
   box-sizing: border-box;
 }
 
+
+.Layout {
+  display: flex;
+  flex-direction: row;
+}
+
+.Layout__ChatBot {
+  width: 40%;
+}
+
+.Layout__ResultPage {
+  width: 60%;
+}
+
+
