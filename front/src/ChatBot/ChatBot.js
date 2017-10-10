@@ -26,18 +26,24 @@ class ChatBot extends Component {
     }
 
     handleKeyPress = (event) => {
-      if(event.key == 'Enter'){
+      if(event.key == 'Enter' && event.target.value !== ''){
         console.log('enter press here! ', event.target.value)
-        /*this.setState({
-          criteria,
-        });*/
+        this.setState({
+          items: [...this.state.items, {
+            entry: event.target.value,
+            isBot: false,
+          }],
+        });
+        if (this.props.handleNewAnswer) {
+          this.props.handleNewAnswer(event.target.value);
+        }
+        event.target.value = '';
       }
     }
 
-    componentWillMount() {
-      // TODO
-    }
+    getRandomQuestion = () => {
 
+    }
 
     render() {
       const { items } = this.state;
@@ -45,9 +51,6 @@ class ChatBot extends Component {
         <div className="ChatBot">
           <div className="ChatBot__chat">
             { items.map((item, index) => <Bubble key={`it-${index}`} isBot={item.isBot}>{item.entry}</Bubble>) }
-            <Bubble>
-              We are 5, 2 adults and 3 children
-            </Bubble>
           </div>
           <div className="ChatBot__form">
             <input className="ChatBot__input" id="chat" placeholder="..." onKeyPress={this.handleKeyPress} />
