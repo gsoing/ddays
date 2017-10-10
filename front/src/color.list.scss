@@ -1,0 +1,127 @@
+/**
+ * Colors mapping
+ * All variables here should be prefixed with "$color-"
+ */
+
+ // 1) Common colors (same for Renault and Dacia)
+ 
+ //social networks colors
+ $color-facebook: #3b5998;
+ $color-google: #db4437;
+ $color-twitter: #3eafe6;
+ $color-instagram: #e92b2b;
+ 
+ // 2) Renault and Dacia colors
+ 
+ $color-theme: (
+   // ==> Renault only colors
+   renault: (
+     neutral: (
+       white: #fff,
+       lightest: #f3f5f6,
+       lighter: #f9f9fb,
+       light: #e6e6ec,
+       medium: #ccc,
+       neutral: #777,
+       darker: #777f91,
+       base: #333,
+       darkest: #1f2532,
+       black: #000,
+     ),
+     primary: (
+       base: #ffce33,
+     ),
+     alert: (
+       neutral: #ee5352,
+       base: #e91630,
+     ),
+     success: (
+       base: #50e3ac,
+     ),
+     overlay: (
+       frosted: rgba(255, 255, 255, 0.9),
+       base: rgba(255, 255, 255, 0.75),
+       dark: rgba(0, 0, 0, 0.5),
+     ),
+     warrantySmart: (
+       base: #dc548d,
+     ),
+     warrantyZe: (
+       base: #65c4ed,
+     ),
+   ),
+   // ==> Dacia only colors
+   dacia: (
+     neutral: (
+       white: #fff,
+       lightest: #f3f5f6,
+       lighter: #f9f9fb,
+       light: #e6e6ec,
+       medium: #ccc,
+       neutral: #777,
+       base: #333,
+       darker: #777f91,
+       darkest: #1f2532,
+       black: #000,
+     ),
+     primary: (
+       base: #ffce33,
+     ),
+     alert: (
+       neutral: #ee5352,
+       base: #e91630,
+     ),
+     success: (
+       base: #50e3ac,
+     ),
+     overlay: (
+       frosted: rgba(255, 255, 255, 0.9),
+       base: rgba(255, 255, 255, 0.75),
+       dark: rgba(0, 0, 0, 0.5),
+     ),
+     warrantySmart: (
+       base: #dc548d,
+     ),
+     warrantyZe: (
+       base: #65c4ed,
+     ),
+     filter: (
+       base: #888,
+     ),
+   ),
+   // ==> Alpine only colors
+   alpine: (
+     neutral: (
+       white: #fff,
+       lightest: #f3f5f6,
+       lighter: #f9f9fb,
+       light: #e6e6ec,
+       medium: #ccc,
+       neutral: #777,
+       darker: #777f91,
+       base: #333,
+       darkest: #1f2532,
+       black: #000,
+     ),
+     primary: (
+       lighter: #f1f5fa,
+       light: #aabee0,
+       base: #0843a6,
+     ),
+     alert: (
+       base: #f00,
+     ),
+     success: (
+       base: #14bd6b,
+     ),
+     overlay: (
+       frosted: rgba(255, 255, 255, 0.9),
+       base: rgba(255, 255, 255, 0.75),
+       dark: rgba(0, 0, 0, 0.5),
+     ),
+     filter: (
+       base: #777f91,
+     ),
+   ),
+ );
+ 

@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`funnel header component should render correctly with default props 1`] = `
+<header
+  className="FunnelHeader"
+>
+  <span
+    className="FunnelHeader__title"
+  >
+    
+  </span>
+  <div>
+    Link component:
+    <img
+      alt={undefined}
+      className="FunnelHeader__brand"
+      src="test-file-stub"
+    />
+  </div>
+</header>
+`;
+
+exports[`funnel header component should render correctly with forced H1 title 1`] = `
+<header
+  className="FunnelHeader"
+>
+  <h1
+    className="FunnelHeader__title"
+  >
+    Foo
+  </h1>
+  <div>
+    Link component:
+    <img
+      alt="Bar"
+      className="FunnelHeader__brand"
+      src="test-file-stub"
+    />
+  </div>
+</header>
+`;
+
+exports[`funnel header component should render correctly with forced span title 1`] = `
+<header
+  className="FunnelHeader"
+>
+  <span
+    className="FunnelHeader__title"
+  >
+    Foo
+  </span>
+  <div>
+    Link component:
+    <img
+      alt={undefined}
+      className="FunnelHeader__brand"
+      src="test-file-stub"
+    />
+  </div>
+</header>
+`;
