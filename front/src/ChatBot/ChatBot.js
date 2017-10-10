@@ -7,19 +7,28 @@ const getRandomInt = (min, max) => Math.floor(Math.random() * ((max - min) + 1))
 
 const QUESTIONS = [
   {
-    question: "Yo youy you",
+    question: "What is your maximum budget ?",
+    context: "TODO"
   },
   {
-    question: "Yo youy you 2",
+    question: "Are you looking for your principal car or your secondary car ?",
+    context: "TODO2"
   },
   {
-    question: "Yo youy you 3",
+    question: "Do you have children ?",
+    context: "TODO3"
   },
   {
-    question: "Yo youy you 4",
+    question: "Do you want a big or a small trunk ?",
+    context: "TODO4"
   },
   {
-    question: "Yo youy you 5",
+    question: "Do you live in a city or in the countryside ?",
+    context: "TODO5"
+  },
+  {
+    question: "Are you in a hurry for having your car?",
+    context: "TODO6"
   }
 ];
 
@@ -32,49 +41,68 @@ class ChatBot extends Component {
       super(props);
 
       this.state = {
+        // Questions restantes
         questions: QUESTIONS,
+         // Items affichés
         items: [
           {
             entry: "Hello ! Welcome to the car chooser",
             isBot: true,
           }
-        ]
+        ],
+        currentQuestion: {}
       };
     }
 
     handleKeyPress = (event) => {
       if(event.key == 'Enter' && event.target.value !== ''){
         console.log('enter press here! ', event.target.value)
+
+        const { questions, question } = this.getRandomQuestion();
+        if (this.props.handleNewAnswer) {
+          this.props.handleNewAnswer({lastAnswer: event.target.value, context: this.state.currentQuestion.context});
+        }
+
+
+        const answer = {
+          entry: event.target.value,
+          isBot: false,
+        }
+
         this.setState({
           items: [
             ...this.state.items,
-            {
-              entry: event.target.value,
-              isBot: false,
-            },
-            this.getRandomQuestion()
+            answer,
+            question
           ],
+          questions,
+          currentQuestion: question,
         });
-        if (this.props.handleNewAnswer) {
-          this.props.handleNewAnswer(event.target.value);
-        }
+
+        // Clean input
         event.target.value = '';
-        this.getRandomQuestion();
       }
     }
 
     getRandomQuestion = () => {
       const index = getRandomInt(0,this.state.questions.length-1);
+      const question = this.state.questions[index].question;
       return {
-        entry: this.state.questions[index].question,
-        isBot: true,
+        question : {
+          entry: question,
+          isBot: true,
+        },
+        questions: this.state.questions.filter(q => q.question != question),
       };
 
     }
 
     componentDidMount() {
+      const { questions, question } = this.getRandomQuestion();
       this.setState({
-        items: [...this.state.items, this.getRandomQuestion()]
+        items: [...this.state.items, question],
+        questions,
+        currentQuestion: question,
       });
     }
 
