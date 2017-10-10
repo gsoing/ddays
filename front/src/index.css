@@ -1,9 +1,61 @@
+
+/**
+ * Default regular font-face
+ */
+ @font-face {
+  font-family: 'Renault';
+  font-weight: normal;
+  src:
+    url('fonts/read/light.woff2') format('woff2'),
+    url('fonts/read/light.woff') format('woff'),
+    url('fonts/read/light.ttf') format('truetype');
+}
+
+/**
+ * Default bold font-face
+ */
+@font-face {
+  font-family: 'Renault';
+  font-weight: bold;
+  src:
+    url('fonts/read/medium.woff2') format('woff2'),
+    url('fonts/read/medium.woff') format('woff'),
+    url('fonts/read/medium.ttf') format('truetype');
+}
+
+/**
+ * Default bold renault brand font-face
+ */
+@font-face {
+  font-family: 'RenaultLife';
+  src:
+    url('fonts/renaultLife/bold.woff2') format('woff2'),
+    url('fonts/renaultLife/bold.woff') format('woff'),
+    url('fonts/renaultLife/bold.ttf') format('truetype');
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Renault', 'Arial', sans-serif;
 }
 
 *, *::before, *::after {
   box-sizing: border-box;
 }
+
+
+.Layout {
+  display: flex;
+  flex-direction: row;
+}
+
+.Layout__ChatBot {
+  width: 40%;
+}
+
+.Layout__ResultPage {
+  width: 60%;
+}
+
+

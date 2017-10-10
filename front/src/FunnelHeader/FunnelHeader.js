@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './FunnelHeader.common.css';
+import './FunnelHeader.css';
 import mainLogo from '../img/mainLogo.svg';
 
 /**
