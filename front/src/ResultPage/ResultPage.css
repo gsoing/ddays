@@ -1,8 +1,22 @@
+.ResultPage {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+}
+
 .ResultPage__list {
+    flex: 1;
     display: flex;
     flex-wrap: wrap;
     padding: 16px;
     justify-content: space-between;
+}
+
+.ResultPage__wrapper {
+}
+.ResultPage__wrapper--loading {
+  opacity: 0.6;
 }
 
 .ResultPage__listItem {
