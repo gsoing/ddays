@@ -9,13 +9,3 @@
     padding: 8px;
     width: 33%;
 }
-
-.ResultPage__tag {
-  position: relative;
-  display: inline-block;
-  background-color: palette(neutral, light);
-  color: palette(neutral, darker);
-  border-radius: 16px;
-  text-transform: uppercase;
-  line-height: 1.4;
-}

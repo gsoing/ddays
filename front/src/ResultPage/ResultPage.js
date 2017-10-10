@@ -1,5 +1,6 @@
 import React from 'react';
 import VehicleItem from '../VehicleItem/VehicleItem';
+import Tags from '../Tags/Tags';
 
 import './ResultPage.css';
 
@@ -7,15 +8,7 @@ const ResultPage = ({ vehicles, currentParams, loading }) => {
 
   return (
     <div className="ResultPage">
-      <div className="ResultPage__criterias">
-        {
-          Object.keys(currentParams).map(keyParam => (
-            <span className="ResultPage__tag">
-              {currentParams[keyParam]}
-            </span>
-          ))
-        }
-      </div>
+      <Tags currentParams={currentParams} />
       { !loading &&
         <div className="ResultPage__list">
         {

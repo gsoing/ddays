@@ -1,0 +1,16 @@
+
+.Tags{
+  padding: 16px;
+}
+
+.Tags__tag {
+  position: relative;
+  display: inline-block;
+  background-color: #e6e6ec;
+  margin: 0 8px;
+  padding: 4px 8px;
+  color: #777f91;
+  border-radius: 8px;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
