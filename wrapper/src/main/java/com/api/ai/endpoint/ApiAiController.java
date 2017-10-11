@@ -52,11 +52,14 @@ public class ApiAiController {
         URI url = buildUrlFromRequest(frontRequest);
 
         HttpEntity<AiApiRequestDto> entity = buildRequestEntity(frontRequest);
+
         AiApiResponse response = restTemplate.exchange(url, HttpMethod.POST, entity, AiApiResponse.class).getBody();
+        System.out.println(response);
 
         if (frontRequest.getCurrentParams() != null) {
             mergedMap.putAll(frontRequest.getCurrentParams());
         }
+
         if (response.getResult().getParameters() != null) {
             mergedMap.putAll(response.getResult().getParameters());
         }

@@ -2,10 +2,8 @@ package com.api.ai.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.api.ai.dto.FrontResponse;
 import com.api.ai.dto.VehicleDto;
@@ -42,7 +40,7 @@ public class ElasticService {
         return FrontResponse.builder()
                 .vehicles(vehicles)
                 .currentParams(currentParams)
-                .total(node.findValue("total").asInt())
+                .total(node.findValue("hits").get("total").asInt())
                 .build();
     }
 
@@ -50,20 +48,22 @@ public class ElasticService {
         List<VehicleDto> vehicles = new ArrayList<>();
         int total = 0;
         if (!CollectionUtils.isEmpty(params)) {
+
             RestTemplate restTemplate = new RestTemplate();
             ObjectMapper mapper = new ObjectMapper();
 
             String val = restTemplate.getForObject(URL + "?q=" + buildUrl(params), String.class);
+            System.out.print(URL + "?q=" + buildUrl(params));
             JsonNode node = mapper.readValue(val, JsonNode.class);
 
             List<JsonNode> arrays = node.findValues("_source");
-
             for (JsonNode jsonNode : arrays) {
                 vehicles.add(mapper.treeToValue(jsonNode, VehicleDto.class));
             }
 
-            total = node.findValue("total").asInt();
+            total = node.findValue("hits").get("total").asInt();
         }
+
         return FrontResponse.builder()
                 .vehicles(vehicles)
                 .currentParams(params)
@@ -71,10 +71,21 @@ public class ElasticService {
                 .build();
     }
 
+
     private String buildUrl(HashMap<String, Object> params) {
         StringBuilder stringBuilder = new StringBuilder();
         params.entrySet().stream().forEach(a ->
-                stringBuilder.append(a.getKey()).append(":").append(a.getValue()).append(" AND "));
+                {
+                    if (a.getKey().equals("children") || a.getKey().equals("hobby")) {
+                        stringBuilder.append(a.getKey()).append(":").append("[" + a.getValue() + " TO *]").append(" AND ");
+                    }
+                    if (a.getKey().equals("price")) {
+                        stringBuilder.append(a.getKey()).append(":").append("[ 0 TO " + a.getValue() + "]").append(" AND ");
+                    } else {
+                        stringBuilder.append(a.getKey()).append(":").append(a.getValue()).append(" AND ");
+                    }
+                }
+        );
         int start = stringBuilder.lastIndexOf(" AND ");
         return stringBuilder.substring(0, start).toString();
     }
