@@ -3,6 +3,7 @@ import interpolate from '../utils';
 import { paramsMapping } from '../constants';
 import Star from '../Star/Star';
 import axios from 'axios';
+import VehicleItem from '../VehicleItem/VehicleItem';
 
 import './SuggestForm.css';
 
@@ -20,6 +21,22 @@ class SuggestForm extends Component {
         paramsStars: {},
         loading: true,
       };
+    }
+
+    sendSuggest = () => {
+      axios.post('http://localhost:3001/suggest', {
+        vehicle: {...this.props.vehicle, price: 10000},
+        dealerName: 'Renault Paris 17ieme',
+      })
+      .then((response) => {
+        /*this.setState({
+          currentParams: response.data ? response.data.currentParams : {},
+          paramsStars: response.data ? response.data.paramsStars : {},
+          email: response.data ? response.data.email : null,
+          loading: false,
+        });
+        if(response.data) clearInterval(this.interval)*/
+      });
     }
 
     componentDidMount(){
@@ -49,7 +66,7 @@ class SuggestForm extends Component {
               <span>Client wishlist</span>
             </div>
           <div className="SuggestForm__line ContactFrom__email">
-            <label className="ContactForm__emailLabel" for="email">Email</label>
+            <label className="ContactForm__emailLabel">Email</label>
             <span className="ContactForm__emailInput">{this.state.email}</span>
           </div>
           <div className="SuggestForm__line SuggestForm__criteriasTitle">
@@ -65,9 +82,22 @@ class SuggestForm extends Component {
               ))
             }
           </ul>
-          <div className="SuggestForm__line ContactForm__validation">
-            <button className="SuggestForm__validationButton">Confirm</button>
-          </div>
+          {this.props.vehicle &&
+            <div className="SuggestForm__offer">
+              <div className="SuggestForm__offer__vehicle">
+                <VehicleItem vehicle={this.props.vehicle} isDealer />
+              </div>
+              <div className="SuggestForm__offer__vehicleinfo">
+                <div className="ContactForm__line ContactFrom__email">
+                  <label className="ContactForm__emailLabel" htmlFor="price">Price</label>
+                  <input className="ContactForm__emailInput" type="text" name="price" id="price" placeholder="10000"/>
+                </div>
+                <div className="SuggestForm__line ContactForm__validation">
+                  <button className="SuggestForm__validationButton" onClick={this.sendSuggest}>Send suggest</button>
+                </div>
+              </div>
+            </div>
+          }
         </div>
         );
       }

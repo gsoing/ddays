@@ -5,8 +5,13 @@ import Loader from '../Loader/Loader';
 
 import './ResultPage.css';
 
-const ResultPage = ({ vehicles, currentParams, loading, total, isDealer = false }) => {
+const ResultPage = ({ vehicles, currentParams, loading, total, isDealer = false, onSelect }) => {
   const classNames = loading ? "ResultPage__wrapper ResultPage__wrapper--loading" : "ResultPage__wrapper";
+  const handleSelect = (vehicle) => {
+    if(onSelect) {
+      onSelect(vehicle);
+    }
+  }
   return (
     <div className="ResultPage">
       <Loader loading={loading} />
@@ -24,7 +29,7 @@ const ResultPage = ({ vehicles, currentParams, loading, total, isDealer = false 
           {
             vehicles.map(vehicle => (
               <div className="ResultPage__listItem">
-                <VehicleItem vehicle={vehicle} isDealer={isDealer} />
+                <VehicleItem vehicle={vehicle} isDealer={isDealer} onSelect={handleSelect} />
               </div>
             ))
           }{

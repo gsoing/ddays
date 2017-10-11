@@ -23,6 +23,7 @@ class AppDealer extends Component {
       loading: true,
       sessionId: Math.random().toString(36).substring(2, 15),
       lastQuestion: false,
+      vehicle: null,
     };
   }
 
@@ -38,6 +39,12 @@ class AppDealer extends Component {
         })
       });
     });
+  }
+
+  makeSuggestion = (vehicle) => {
+    this.setState({
+      vehicle,
+    })
   }
 
   componentDidMount(){
@@ -57,12 +64,14 @@ class AppDealer extends Component {
               loading={loading}
               total={total}
               isDealer
+              onSelect={this.makeSuggestion}
             />
           </div>
           <div className="Layout__Suggest">
             <SuggestForm
                 currentParams={currentParams}
                 isDealer
+                vehicle={this.state.vehicle}
               />
           </div>
         </div>

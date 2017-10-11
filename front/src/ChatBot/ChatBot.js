@@ -7,29 +7,33 @@ const getRandomInt = (min, max) => Math.floor(Math.random() * ((max - min) + 1))
 
 const QUESTIONS = [
   {
-    question: "What is your maximum budget ?",
-    context: "TODO"
-  },
-  {
-    question: "Are you looking for your principal car or your secondary car ?",
-    context: "TODO2"
-  },
-  {
     question: "Do you have children ?",
-    context: "TODO3"
+    context: "CHILDREN"
   },
-  /*{
-    question: "Do you want a big or a small trunk ?",
-    context: "TODO4"
+  {
+    question: "Will you use your car daily or for hobby ?",
+    context: "USE"
+  },
+  {
+    question: "How many kilometers do you drive per year ?",
+    context: "FAMILYGROW"
+  },
+  {
+    question: "DO you want to save the planet ?",
+    context: "ECOLO"
+  },
+  {
+    question: "What's your favorite hobby ?",
+    context: "HOBBY"
   },
   {
     question: "Do you live in a city or in the countryside ?",
-    context: "TODO5"
+    context: "CITY"
   },
   {
-    question: "Are you in a hurry for having your car?",
-    context: "TODO6"
-  }*/
+    question: "What is your maximum budget ?",
+    context: "PRICE"
+  }
 ];
 
 const LASTQUESTION = {

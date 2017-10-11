@@ -2,7 +2,7 @@ import React from 'react';
 
 import './VehicleItem.css';
 
-const VehicleItem = ({vehicle, isDealer}) => {
+const VehicleItem = ({vehicle, isDealer, onSelect}) => {
 
     const {
         brand,
@@ -16,6 +16,12 @@ const VehicleItem = ({vehicle, isDealer}) => {
         pollution,
         vehicleType,
     } = vehicle;
+
+    const onClick = () => {
+      if(onSelect) {
+        onSelect(vehicle);
+      }
+    }
 
     return (
         <div className="VehicleItem">
@@ -31,10 +37,10 @@ const VehicleItem = ({vehicle, isDealer}) => {
                     <li className="VehicleItem__info">{energy}</li>
                     {mileage && <li className="VehicleItem__info">{mileage} km</li>}
                 </ul>
-                <p className="VehicleItem__price">{Intl.NumberFormat("fr-FR").format(price)} €</p>
+                {price && <p className="VehicleItem__price">{Intl.NumberFormat("fr-FR").format(price)} €</p>}
             </div>
             <div className="VehicleItem__choose">
-              <button className="VehicleItem__chooseButton">Select</button>
+              <button className="VehicleItem__chooseButton" onClick={onClick}>Select</button>
             </div>
         </div>
     )
