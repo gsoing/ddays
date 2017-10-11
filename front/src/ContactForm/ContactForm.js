@@ -6,13 +6,16 @@ import './ContactForm.css';
 
 const ContactForm = ({currentParams}) => (
   <div className="ContactForm">
+    <div className="ContactForm__title">
+      My wishlist
+    </div>
     <div className="ContactForm__line ContactFrom__email">
-      <label className="ContactForm__emailLabel" for="email">Email :</label>
+      <label className="ContactForm__emailLabel" for="email">Email</label>
       <input className="ContactForm__emailInput" type="text" name="email" id="email"/>
     </div>
     <div className="ContactForm__line ContactForm__criteriasTitle">
-      <span>My wishlist</span>
-      <span>Criteria importance</span>
+      <span>Criteria</span>
+      <span>Importance</span>
     </div>
     <ul className="ContactForm__criterias">
       { Object.keys(currentParams).map(key => (
