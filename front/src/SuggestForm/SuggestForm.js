@@ -79,7 +79,7 @@ class SuggestForm extends Component {
           <ul className="SuggestForm__criterias">
             { Object.keys(this.state.currentParams).map(key => (
                 <li className="SuggestForm__criteria">
-                  <span className="SuggestForm__tag">{interpolate(paramsMapping[key], { [key] : this.state.currentParams[key] })}</span>
+                  <span className="SuggestForm__tag">{paramsMapping[key](key,this.state.currentParams[key])}</span>
                   <span className="SuggestForm__star"><Star starKey={key} value={this.state.paramsStars[key]}/></span>
                 </li>
               ))

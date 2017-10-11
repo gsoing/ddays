@@ -91,7 +91,7 @@ class ContactForm extends Component {
           <ul className="ContactForm__criterias">
             { Object.keys(currentParams).map(key => (
                 <li className="ContactForm__criteria">
-                  <span className="ContactForm__tag">{interpolate(paramsMapping[key], { [key] : currentParams[key] })}</span>
+                  <span className="ContactForm__tag">{paramsMapping[key](key,currentParams[key])}</span>
                   <span className="ContactForm__star"><Star starKey={key}/></span>
                 </li>
               ))

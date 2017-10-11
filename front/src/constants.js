@@ -1,11 +1,11 @@
 const paramsMapping = {
-  children: "{children} children",
-  price: "<= {price} €" ,
-  use: "use as {use}",
-  familygrow: "use",
-  ecolo: "ecolo",
-  hobby: "{hobby} big trunk",
-  city: "city",
+  children: (key, value) => { return `${value} children(s)`},
+  price: (key, value) => { return `<= ${value} €`} ,
+  use: (key, value) => { return `${value} use`},
+  familygrow: (key, value) => { return `${value} km/year`},
+  ecolo: (key, value) => { return value==='true' ? 'green car' : 'classic car' },
+  hobby: (key, value) => { return value==='1' ? "big trunk" : "small trunk"},
+  city: (key, value) => { return value==='city' ? "city" : "countryside"},
 };
 
 const currentServer = 'http://localhost';
