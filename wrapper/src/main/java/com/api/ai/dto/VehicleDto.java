@@ -26,7 +26,7 @@ public class VehicleDto {
     private String versionLabel;
     private double price;
     private double priceHT;
-    private List<Images> images;
+    private String images;
     private String type;
     private String pollution;
     private String energy;
@@ -36,16 +36,5 @@ public class VehicleDto {
     private String ecolo;
     private String city;
     private String hobby;
-
-
-    @Data
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class Images {
-        private String type;
-        private String url;
-    }
-
 
 }
