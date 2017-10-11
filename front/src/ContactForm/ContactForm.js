@@ -1,20 +1,36 @@
 import React from 'react';
 import interpolate from '../utils';
-import { paramsMapping } from '../constants';
+import axios from 'axios';
+import { paramsMapping, urlWishList } from '../constants';
 import Star from '../Star/Star';
 
 import './ContactForm.css';
 
-const ContactForm = ({currentParams, isDealer = false}) => (
+const getRandomInt = (min, max) => Math.floor(Math.random() * ((max - min) + 1)) + min;
+
+const saveWishList = (currentParams) => {
+  const payload = {
+    email: 'vincent.dv@gmail.com',
+    currentParams,
+    paramsStars : {},
+  }
+
+  Object.keys(currentParams).map(key => {
+    payload.paramsStars[key] = getRandomInt(2,4);
+  })
+
+  axios.post(urlWishList, payload);
+}
+
+
+const ContactForm = ({currentParams}) => (
   <div className="ContactForm">
     <div className="ContactForm__title">
-    {!isDealer && <span>My wishlist</span>}
-    {isDealer && <span>Client wishlist</span>}
+      <span>My wishlist</span>
     </div>
     <div className="ContactForm__line ContactFrom__email">
       <label className="ContactForm__emailLabel" for="email">Email</label>
-      {!isDealer && <input className="ContactForm__emailInput" type="text" name="email" id="email"/>}
-      {isDealer && <span className="ContactForm__emailInput">vincent.dv@gmail.com</span>}
+      <input className="ContactForm__emailInput" type="text" name="email" id="email" placeholder="vincent.dv@gmail.com"/>
     </div>
     <div className="ContactForm__line ContactForm__criteriasTitle">
       <span>Criteria</span>
@@ -30,7 +46,7 @@ const ContactForm = ({currentParams, isDealer = false}) => (
       }
     </ul>
     <div className="ContactForm__line ContactForm__validation">
-      <button className="ContactForm__validationButton">Confirm</button>
+      <button className="ContactForm__validationButton" onClick={() => saveWishList(currentParams)}>Confirm</button>
     </div>
   </div>
 );
