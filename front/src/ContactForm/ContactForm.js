@@ -17,10 +17,8 @@ const ContactForm = ({currentParams}) => (
     <ul className="ContactForm__criterias">
       { Object.keys(currentParams).map(key => (
           <li className="ContactForm__criteria">
-            <span>
-              <span className="ContactForm__tag">{interpolate(paramsMapping[key], { [key] : currentParams[key] })}</span>
-            </span>
-            <span>stars</span>
+            <span className="ContactForm__tag">{interpolate(paramsMapping[key], { [key] : currentParams[key] })}</span>
+            <span className="ContactForm__star">stars</span>
           </li>
         ))
       }
