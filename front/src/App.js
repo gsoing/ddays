@@ -17,7 +17,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      currentParams: [],
+      currentParams: {},
       vehicles: [],
       total: 0,
       loading: true,
@@ -39,7 +39,7 @@ class App extends Component {
         lastAnswer: datas.lastAnswer,
         context: datas.context,
         sessionId : this.state.sessionId,
-        currentParams: this.state.currentParams.length ? this.state.currentParams : undefined,
+        currentParams: this.state.currentParams !== {} ? this.state.currentParams : undefined,
       };
       this.setState({loading: true}, () => {
         axios.post(urlapi, payload)
