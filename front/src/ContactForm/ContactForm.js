@@ -5,14 +5,16 @@ import Star from '../Star/Star';
 
 import './ContactForm.css';
 
-const ContactForm = ({currentParams}) => (
+const ContactForm = ({currentParams, isDealer = false}) => (
   <div className="ContactForm">
     <div className="ContactForm__title">
-      My wishlist
+    {!isDealer && <span>My wishlist</span>}
+    {isDealer && <span>Client wishlist</span>}
     </div>
     <div className="ContactForm__line ContactFrom__email">
       <label className="ContactForm__emailLabel" for="email">Email</label>
-      <input className="ContactForm__emailInput" type="text" name="email" id="email"/>
+      {!isDealer && <input className="ContactForm__emailInput" type="text" name="email" id="email"/>}
+      {isDealer && <span className="ContactForm__emailInput">vincent.dv@gmail.com</span>}
     </div>
     <div className="ContactForm__line ContactForm__criteriasTitle">
       <span>Criteria</span>
