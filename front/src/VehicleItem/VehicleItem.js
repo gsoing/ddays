@@ -4,8 +4,8 @@ import './VehicleItem.css';
 
 const VehicleItem = ({vehicle}) => {
 
-    const { 
-        brand, 
+    const {
+        brand,
         modelLabel,
         versionLabel,
         image,
@@ -22,7 +22,7 @@ const VehicleItem = ({vehicle}) => {
             <div className="VehicleItem__pictureBox">
                 <img src={image[0].url} alt="default" className="VehicleItem__picture"/>
                 <span className="VehicleItem__vehicleType">{vehicleType === 'VO' ? 'SECOND-HAND' :  'NEW'}</span>
-            </div>      
+            </div>
             <div className="VehicleItem__content">
                 <p className="VehicleItem__title">{brand} {modelLabel}</p>
                 <p className="VehicleItem__subtitle">{versionLabel}</p>
@@ -33,7 +33,9 @@ const VehicleItem = ({vehicle}) => {
                 </ul>
                 <p className="VehicleItem__price">{Intl.NumberFormat("fr-FR").format(price)} €</p>
             </div>
-            <button className="VehicleItem__chooseButton">SELECT</button>
+            <div className="VehicleItem__choose">
+              <button className="VehicleItem__chooseButton">Select</button>
+            </div>
         </div>
     )
 }
