@@ -23,3 +23,27 @@
     padding: 8px;
     width: 33%;
 }
+
+
+.ResultPage__header {
+  height: 55px;
+  border: 1px solid #e6e6ec;
+  display: flex;
+  flex-direction: row;
+  width: 95%;
+  margin: 6px auto 2px auto;
+  border-radius: 6px;
+  background: #f9f9fb;
+}
+
+.ResultPage__tags {
+  flex: 1;
+  border-right: 1px solid #e6e6ec;
+}
+
+.ResultPage__total {
+  width: 150px;
+  font-size: 1.6rem;
+  padding: 16px 0px;
+  font-weight: bold;
+}
