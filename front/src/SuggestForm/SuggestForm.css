@@ -8,6 +8,14 @@
   width: 99%;
   margin: auto;
 }
+.SuggestForm__flex {
+  padding: 0px;
+}
+
+.SuggestForm__flex .SuggestForm__title {
+  flex: 1;
+  margin-top: 50px;
+}
 
 .SuggestForm__title {
   font-size: 2.5rem;

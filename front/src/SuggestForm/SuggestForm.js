@@ -4,6 +4,7 @@ import { paramsMapping } from '../constants';
 import Star from '../Star/Star';
 import axios from 'axios';
 import VehicleItem from '../VehicleItem/VehicleItem';
+import Loader from '../Loader/Loader';
 
 import './SuggestForm.css';
 
@@ -20,6 +21,7 @@ class SuggestForm extends Component {
         currentParams: {},
         paramsStars: {},
         loading: true,
+        isWhishListDisplayed: true,
       };
     }
 
@@ -29,13 +31,9 @@ class SuggestForm extends Component {
         dealerName: 'Renault Paris 17ieme',
       })
       .then((response) => {
-        /*this.setState({
-          currentParams: response.data ? response.data.currentParams : {},
-          paramsStars: response.data ? response.data.paramsStars : {},
-          email: response.data ? response.data.email : null,
-          loading: false,
+        this.setState({
+          isWhishListDisplayed: false,
         });
-        if(response.data) clearInterval(this.interval)*/
       });
     }
 
@@ -57,8 +55,13 @@ class SuggestForm extends Component {
     }
 
     render() {
-      if (!this.state.email) {
-        return <div className="SuggestForm"><div className="SuggestForm__title">Waiting for wishlist</div></div>;
+      if(!this.state.isWhishListDisplayed) {
+        return <div className="SuggestForm"></div>;
+      } else if (!this.state.email) {
+        return (<div className="SuggestForm SuggestForm__flex">
+          <Loader loading />
+          <div className="SuggestForm__title">Waiting for wishlist</div>
+      </div>);
       } else {
         return (
           <div className="SuggestForm">
