@@ -6,7 +6,7 @@ import FunnelHeader from './FunnelHeader/FunnelHeader';
 import ChatBot from './ChatBot/ChatBot';
 import ResultPage from './ResultPage/ResultPage';
 import SuggestForm from './SuggestForm/SuggestForm';
-import { urlapi } from './constants';
+import { urlapi, currentServer } from './constants';
 
 class AppDealer extends Component {
 
@@ -30,7 +30,7 @@ class AppDealer extends Component {
   refreshVehicleListe = () => {
 
     this.setState({loading: true}, () => {
-      axios.get('http://localhost:3001/fakedealer/list')
+      axios.get(currentServer + ':3001/fakedealer/list')
       .then((response) => {
         this.setState({
           total: response.data.total || 0,
