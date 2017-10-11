@@ -63,6 +63,7 @@ public class ApiAiController {
             mergedMap.putAll(response.getResult().getParameters());
         }
 
+        System.out.println(mergedMap);
         return elasticService.getVehicleFromParams(mergedMap);
     }
 

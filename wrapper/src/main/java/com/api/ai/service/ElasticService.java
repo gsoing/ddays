@@ -2,6 +2,7 @@ package com.api.ai.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import org.springframework.web.client.RestTemplate;
 public class ElasticService {
 
     private static final String URL = "http://localhost:9200/vehicles/_search";
+    private final List<String> authorizedParam = Arrays.asList("children", "hobby", "ecolo", "use", "city", "price");
 
     public FrontResponse getAllVehicle(HashMap<String, Object> currentParams) throws IOException {
         RestTemplate restTemplate = new RestTemplate();
@@ -76,13 +78,15 @@ public class ElasticService {
         StringBuilder stringBuilder = new StringBuilder();
         params.entrySet().stream().forEach(a ->
                 {
-                    if (a.getKey().equals("children") || a.getKey().equals("hobby")) {
-                        stringBuilder.append(a.getKey()).append(":").append("[" + a.getValue() + " TO *]").append(" AND ");
-                    }
-                    if (a.getKey().equals("price")) {
-                        stringBuilder.append(a.getKey()).append(":").append("[ 0 TO " + a.getValue() + "]").append(" AND ");
-                    } else {
-                        stringBuilder.append(a.getKey()).append(":").append(a.getValue()).append(" AND ");
+                    if (authorizedParam.contains(a.getKey())) {
+                        if (a.getKey().equals("children") || a.getKey().equals("hobby")) {
+                            stringBuilder.append(a.getKey()).append(":").append("[" + a.getValue() + " TO *]").append(" AND ");
+                        }
+                        if (a.getKey().equals("price")) {
+                            stringBuilder.append(a.getKey()).append(":").append("[ 0 TO " + a.getValue() + "]").append(" AND ");
+                        } else {
+                            stringBuilder.append(a.getKey()).append(":").append(a.getValue()).append(" AND ");
+                        }
                     }
                 }
         );
