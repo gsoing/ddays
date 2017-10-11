@@ -10,7 +10,6 @@ import com.api.ai.dto.AiApiRequestDto;
 import com.api.ai.dto.AiApiResponse;
 import com.api.ai.dto.FrontRequest;
 import com.api.ai.dto.FrontResponse;
-import com.api.ai.dto.VehicleDto;
 import com.api.ai.service.ElasticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;

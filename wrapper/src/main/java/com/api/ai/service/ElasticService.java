@@ -21,7 +21,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class ElasticService {
 
-    private static final String URL = "http://10.187.247.15:9200/vehicles/_search";
+    private static final String URL = "http://localhost:9200/vehicles/_search";
 
     public FrontResponse getAllVehicle(HashMap<String, Object> currentParams) throws IOException {
         RestTemplate restTemplate = new RestTemplate();
