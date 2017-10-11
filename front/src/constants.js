@@ -1,10 +1,10 @@
 const paramsMapping = {
   children: "{children} children",
   price: "<= {price} €" ,
-  use: "use",
+  use: "use as {use}",
   familygrow: "use",
   ecolo: "ecolo",
-  hobby: "love {hobby}",
+  hobby: "{hobby} big trunk",
   city: "city",
 };
 
