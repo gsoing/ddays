@@ -1,11 +1,9 @@
 import React from 'react';
 import paramsMapping from '../constants';
+import interpolate from '../utils';
 
 import './Tags.css';
 
-const interpolate = (str, templateContext) => {
-  return str.replace(/{([\s\S]+?)}/g, (match, submatch) => templateContext[submatch]);
-}
 
 const Tags = ({currentParams}) => (
   <div className="Tags">
