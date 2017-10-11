@@ -40,6 +40,24 @@
   font-size: 1.6rem;
 }
 
+.ContactFrom__address {
+  display: flex;
+  flex-direction: column;
+}
+
+.ContactForm__addressLabel {
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.ContactForm__addressInput {
+  margin-left: 10px;
+  min-width: 200px;
+  padding: 8px;
+  margin-bottom: 8px;
+  font-size: 1.6rem;
+}
+
 .ContactForm__criteriasTitle {
   display: flex;
   justify-content: space-between;

@@ -6,7 +6,7 @@ import FunnelHeader from './FunnelHeader/FunnelHeader';
 import ChatBot from './ChatBot/ChatBot';
 import ResultPage from './ResultPage/ResultPage';
 import SuggestForm from './SuggestForm/SuggestForm';
-import { urlapi } from './constants';
+import { urlapi, currentServer } from './constants';
 
 class AppDealer extends Component {
 
@@ -23,13 +23,14 @@ class AppDealer extends Component {
       loading: true,
       sessionId: Math.random().toString(36).substring(2, 15),
       lastQuestion: false,
+      vehicle: null,
     };
   }
 
   refreshVehicleListe = () => {
 
     this.setState({loading: true}, () => {
-      axios.get('http://localhost:3001/fakedealer/list')
+      axios.get(currentServer + ':3001/fakedealer/list')
       .then((response) => {
         this.setState({
           total: response.data.total || 0,
@@ -38,6 +39,12 @@ class AppDealer extends Component {
         })
       });
     });
+  }
+
+  makeSuggestion = (vehicle) => {
+    this.setState({
+      vehicle,
+    })
   }
 
   componentDidMount(){
@@ -57,12 +64,14 @@ class AppDealer extends Component {
               loading={loading}
               total={total}
               isDealer
+              onSelect={this.makeSuggestion}
             />
           </div>
           <div className="Layout__Suggest">
             <SuggestForm
                 currentParams={currentParams}
                 isDealer
+                vehicle={this.state.vehicle}
               />
           </div>
         </div>
