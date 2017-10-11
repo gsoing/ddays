@@ -5,7 +5,7 @@ import './AppDealer.css';
 import FunnelHeader from './FunnelHeader/FunnelHeader';
 import ChatBot from './ChatBot/ChatBot';
 import ResultPage from './ResultPage/ResultPage';
-import ContactForm from './ContactForm/ContactForm';
+import SuggestForm from './SuggestForm/SuggestForm';
 import { urlapi } from './constants';
 
 class AppDealer extends Component {
@@ -27,17 +27,11 @@ class AppDealer extends Component {
   }
 
   refreshVehicleListe = () => {
-    const payload =  {
-      lastAnswer: undefined,
-      context: undefined,
-      sessionId : this.state.sessionId,
-      currentParams: this.state.currentParams.length ? this.state.currentParams : undefined,
-    };
+
     this.setState({loading: true}, () => {
-      axios.post(urlapi, payload)
+      axios.get('http://localhost:3001/fakedealer/list')
       .then((response) => {
         this.setState({
-          currentParams: response.data.currentParams || [],
           total: response.data.total || 0,
           vehicles: response.data.vehicles || [],
           loading: false,
@@ -54,7 +48,7 @@ class AppDealer extends Component {
     const { vehicles, currentParams, loading, lastQuestion, total } = this.state;
     return (
       <div className="AppDealer">
-        <FunnelHeader title="Dealer interface" />
+        <FunnelHeader title="Dealer interface" isDealer />
         <div className="Layout">
           <div className="Layout__ResultPage">
             <ResultPage
@@ -66,7 +60,7 @@ class AppDealer extends Component {
             />
           </div>
           <div className="Layout__Suggest">
-            <ContactForm
+            <SuggestForm
                 currentParams={currentParams}
                 isDealer
               />

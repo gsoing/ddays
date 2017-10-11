@@ -63,7 +63,7 @@ class App extends Component {
     const { vehicles, currentParams, loading, lastQuestion, total } = this.state;
     return (
       <div className="App">
-        <FunnelHeader title="DDays 2017" />
+        <FunnelHeader title="DDays 2017 - Car Chooser" />
         <div className="Layout">
           <div className="Layout__ChatBot"><ChatBot handleNewAnswer={(a) => this.refreshVehicleListe(a)} /></div>
           <div className="Layout__ResultPage">
