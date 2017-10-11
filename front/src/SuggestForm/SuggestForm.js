@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import interpolate from '../utils';
-import { paramsMapping } from '../constants';
+import { paramsMapping, currentServer } from '../constants';
 import Star from '../Star/Star';
 import axios from 'axios';
 import VehicleItem from '../VehicleItem/VehicleItem';
@@ -24,7 +24,7 @@ class SuggestForm extends Component {
     }
 
     sendSuggest = () => {
-      axios.post('http://localhost:3001/suggest', {
+      axios.post(currentServer + ':3001/suggest', {
         vehicle: {...this.props.vehicle, price: 10000},
         dealerName: 'Renault Paris 17ieme',
       })
@@ -42,7 +42,7 @@ class SuggestForm extends Component {
     componentDidMount(){
       this.interval = setInterval(() => {
         this.setState({loading: true}, () => {
-          axios.get('http://localhost:3001/wishList')
+          axios.get(currentServer + ':3001/wishList')
           .then((response) => {
             this.setState({
               currentParams: response.data ? response.data.currentParams : {},

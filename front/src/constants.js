@@ -1,13 +1,16 @@
 const paramsMapping = {
-  budget: "<= {budget} €" ,
   children: "{children} children",
-  city: "city",
+  price: "<= {price} €" ,
+  use: "use",
+  familygrow: "use",
   ecolo: "ecolo",
+  hobby: "love {hobby}",
+  city: "city",
 };
 
-const urlapi = 'http://localhost:3003/api/test';
-//const urlapi = 'http://10.187.247.15:8080/wrapper/chatBot';
+const currentServer = 'http://localhost';
 
-const urlWishList = 'http://localhost:3001/wishList';
+//const urlapi = currentServer + ':3003/api/test';
+const urlapi = 'http://10.187.247.15:8080/wrapper/chatBot';
 
-export {paramsMapping, urlapi, urlWishList};
+export {paramsMapping, urlapi, currentServer};

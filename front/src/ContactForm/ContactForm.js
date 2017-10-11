@@ -1,7 +1,7 @@
 import React from 'react';
 import interpolate from '../utils';
 import axios from 'axios';
-import { paramsMapping, urlWishList } from '../constants';
+import { paramsMapping, currentServer } from '../constants';
 import Star from '../Star/Star';
 
 import './ContactForm.css';
@@ -19,7 +19,7 @@ const saveWishList = (currentParams) => {
     payload.paramsStars[key] = getRandomInt(2,4);
   })
 
-  axios.post(urlWishList, payload);
+  axios.post(currentServer + ':3001/wishList', payload);
 }
 
 
