@@ -19,7 +19,7 @@ const QUESTIONS = [
     context: "FAMILYGROW"
   },
   {
-    question: "DO you want to save the planet ?",
+    question: "Do you want to save the planet ?",
     context: "ECOLO"
   },
   {
@@ -42,7 +42,7 @@ const LASTQUESTION = {
 }
 
 const LASTQUESTION2 = {
-  question: "Do you want to contact all the dealers ?",
+  question: "Do you want to submit a whishlist to the nearest dealer ?",
   context: "LASTQUESTION2"
 }
 

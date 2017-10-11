@@ -9,7 +9,7 @@ const Tags = ({currentParams}) => (
   <div className="Tags">
     {
       Object.keys(currentParams).map(keyParam => (
-        <span className="Tags__tag">
+        <span className="Tags__tag" key={keyParam}>
           {paramsMapping[keyParam](keyParam,currentParams[keyParam])}
         </span>
       ))

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import logo from './logo.svg';
 import './App.css';
 import FunnelHeader from './FunnelHeader/FunnelHeader';
 import ChatBot from './ChatBot/ChatBot';
@@ -21,7 +20,6 @@ class App extends Component {
       vehicles: [],
       total: 0,
       loading: true,
-      sessionId: Math.random().toString(36).substring(2, 15),
       lastQuestion: false,
     };
   }
@@ -38,7 +36,7 @@ class App extends Component {
       const payload =  {
         lastAnswer: datas.lastAnswer,
         context: datas.context,
-        sessionId : this.state.sessionId,
+        sessionId : Math.random().toString(36).substring(2, 15),
         currentParams: this.state.currentParams !== {} ? this.state.currentParams : undefined,
       };
       this.setState({loading: true}, () => {
