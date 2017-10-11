@@ -1,6 +1,7 @@
 import React from 'react';
 import interpolate from '../utils';
 import paramsMapping from '../constants';
+import Star from '../Star/Star';
 
 import './ContactForm.css';
 
@@ -20,7 +21,9 @@ const ContactForm = ({currentParams}) => (
             <span>
               <span className="ContactForm__tag">{interpolate(paramsMapping[key], { [key] : currentParams[key] })}</span>
             </span>
-            <span>stars</span>
+            <span>
+              <Star starKey={key}/>
+            </span>
           </li>
         ))
       }
