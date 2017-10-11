@@ -14,7 +14,7 @@ const QUESTIONS = [
     question: "Are you looking for your principal car or your secondary car ?",
     context: "TODO2"
   },
-  {
+  /*{
     question: "Do you have children ?",
     context: "TODO3"
   },
@@ -29,8 +29,18 @@ const QUESTIONS = [
   {
     question: "Are you in a hurry for having your car?",
     context: "TODO6"
-  }
+  }*/
 ];
+
+const LASTQUESTION = {
+  question: "Have you found something interesting ?",
+  context: "LASTQUESTION"
+}
+
+const LASTQUESTION2 = {
+  question: "Do you want to contact all the dealers ?",
+  context: "LASTQUESTION2"
+}
 
 class ChatBot extends Component {
 
@@ -50,8 +60,33 @@ class ChatBot extends Component {
             isBot: true,
           }
         ],
-        currentQuestion: {}
+        currentQuestion: {},
+        isInputVisible: true,
       };
+    }
+
+    addEntry = (isQuestion, entry, questions, callback) => {
+      let currentQuestion = QUESTIONS.find(q => q.question === entry.entry);
+      if (!currentQuestion && LASTQUESTION.question === entry.entry) currentQuestion = LASTQUESTION;
+      if (!currentQuestion && LASTQUESTION2.question === entry.entry) currentQuestion = LASTQUESTION2;
+      console.log('currentQuestion', currentQuestion)
+      if(isQuestion) {
+        this.setState(
+          {
+            items: [...this.state.items, entry],
+            questions,
+            currentQuestion,
+          },
+          callback
+        );
+      } else {
+        this.setState(
+          {
+            items: [...this.state.items, entry],
+          },
+          callback
+        );
+      }
     }
 
     handleKeyPress = (event) => {
@@ -60,24 +95,31 @@ class ChatBot extends Component {
 
         const { questions, question } = this.getRandomQuestion();
         if (this.props.handleNewAnswer) {
+          console.log(this.state)
           this.props.handleNewAnswer({lastAnswer: event.target.value, context: this.state.currentQuestion.context});
         }
-
 
         const answer = {
           entry: event.target.value,
           isBot: false,
         }
 
-        this.setState({
-          items: [
-            ...this.state.items,
-            answer,
-            question
-          ],
-          questions,
-          currentQuestion: question,
-        });
+        this.addEntry(false, answer, null, () => {
+          if(this.state.currentQuestion.context !== LASTQUESTION2.context) {
+            setTimeout(
+              () => { this.addEntry(true, question, questions, () => true) },
+              500,
+            );
+          } else {
+            this.setState({ isInputVisible: false }, () => this.setState(
+              {
+                items: [...this.state.items, {
+                  entry: "Sorry !",
+                  isBot: true,
+                }],
+              }));
+          }
+         } )
 
         // Clean input
         event.target.value = '';
@@ -85,25 +127,38 @@ class ChatBot extends Component {
     }
 
     getRandomQuestion = () => {
-      const index = getRandomInt(0,this.state.questions.length-1);
-      const question = this.state.questions[index].question;
-      return {
-        question : {
-          entry: question,
-          isBot: true,
-        },
-        questions: this.state.questions.filter(q => q.question != question),
-      };
-
+      if (this.state.questions.length) {
+        const index = getRandomInt(0,this.state.questions.length-1);
+        const question = this.state.questions[index].question;
+        return {
+          question : {
+            entry: question,
+            isBot: true,
+          },
+          questions: this.state.questions.filter(q => q.question != question),
+        };
+      } else if(this.state.currentQuestion.context !== LASTQUESTION.context) {
+        return {
+          question : {
+            entry: LASTQUESTION.question,
+            isBot: true,
+          },
+          questions: []
+        };
+      } else {
+        return {
+          question : {
+            entry: LASTQUESTION2.question,
+            isBot: true,
+          },
+          questions: []
+        };
+      }
     }
 
     componentDidMount() {
       const { questions, question } = this.getRandomQuestion();
-      this.setState({
-        items: [...this.state.items, question],
-        questions,
-        currentQuestion: question,
-      });
+      this.addEntry(true, question, questions, () => true);
     }
 
     render() {
@@ -114,7 +169,7 @@ class ChatBot extends Component {
             { items.map((item, index) => <Bubble key={`it-${index}`} isBot={item.isBot}>{item.entry}</Bubble>) }
           </div>
           <div className="ChatBot__form">
-            <input className="ChatBot__input" id="chat" placeholder="..." onKeyPress={this.handleKeyPress} />
+            { this.state.isInputVisible && <input className="ChatBot__input" id="chat" placeholder="..." onKeyPress={this.handleKeyPress} /> }
           </div>
         </div>)
     }

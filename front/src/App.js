@@ -30,13 +30,14 @@ class App extends Component {
       sessionId : this.state.sessionId,
       currentParams: this.state.currentParams,
     };
-    this.setState({loading: true});
-    axios.post('http://localhost:3003/api/test', payload)
-    .then((response) => {
-      this.setState({
-        ...response.data,
-        loading: false,
-      })
+    this.setState({loading: true}, () => {
+      axios.post('http://localhost:3003/api/test', payload)
+        .then((response) => {
+          this.setState({
+            ...response.data,
+            loading: false,
+          })
+        });
     });
   }
 

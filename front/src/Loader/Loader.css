@@ -14,7 +14,7 @@
   text-align: center;
 }
 .bar:nth-child(1) {
-  background-color: #da4733;
+  background-color: #333;
   animation: loading 3s linear infinite;
 }
 .bar:nth-child(2) {
