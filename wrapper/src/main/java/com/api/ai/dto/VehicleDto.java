@@ -31,6 +31,12 @@ public class VehicleDto {
     private String pollution;
     private String energy;
     private String vehicleType;
+    private int children;
+    private String use;
+    private String ecolo;
+    private String city;
+    private String hobby;
+
 
     @Data
     @Builder
