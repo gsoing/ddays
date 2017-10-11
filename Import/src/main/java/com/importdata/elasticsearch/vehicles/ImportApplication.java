@@ -82,7 +82,12 @@ public class ImportApplication implements CommandLineRunner {
     }
 
     private void deleteIndex() {
-        restTemplate.delete("http://" + elastiSearchHost + ":" + elasticSearchPort + indexName);
+		try {
+			restTemplate.delete("http://" + elastiSearchHost + ":" + elasticSearchPort + indexName);
+		} catch (Exception e) {
+			log.error("Error deleting index, perhaps index not found");
+		}
+
     }
 
     public static void main(String[] args) {
