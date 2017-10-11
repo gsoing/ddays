@@ -72,4 +72,12 @@ body {
   overflow-y: scroll;
 }
 
+.Layout__ResultPage::-webkit-scrollbar {
+  width: 4px;
+}
+
+.Layout__ResultPage::-webkit-scrollbar-thumb {
+  background: #ccc;
+}
+
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import ReactDOM from 'react-dom';
 import Bubble from './Bubble/Bubble';
 import './ChatBot.css';
 
@@ -18,7 +18,7 @@ const QUESTIONS = [
     question: "Do you have children ?",
     context: "TODO3"
   },
-  {
+  /*{
     question: "Do you want a big or a small trunk ?",
     context: "TODO4"
   },
@@ -29,7 +29,7 @@ const QUESTIONS = [
   {
     question: "Are you in a hurry for having your car?",
     context: "TODO6"
-  }
+  }*/
 ];
 
 const LASTQUESTION = {
@@ -63,6 +63,19 @@ class ChatBot extends Component {
         currentQuestion: {},
         isInputVisible: true,
       };
+    }
+
+    scrollToBottom = () => {
+      const node = ReactDOM.findDOMNode(this.messagesEnd);
+      node.scrollIntoView({ behavior: "smooth" });
+    }
+
+    componentDidMount() {
+      this.scrollToBottom();
+    }
+
+    componentDidUpdate() {
+      this.scrollToBottom();
     }
 
     addEntry = (isQuestion, entry, questions, callback) => {
@@ -186,6 +199,9 @@ class ChatBot extends Component {
         <div className="ChatBot">
           <div className="ChatBot__chat">
             { items.map((item, index) => <Bubble key={`it-${index}`} isBot={item.isBot}>{item.entry}</Bubble>) }
+            <div style={{ float:"left", clear: "both" }}
+                ref={(el) => { this.messagesEnd = el; }}>
+            </div>
           </div>
           <div className="ChatBot__form">
             { this.state.isInputVisible && <input className="ChatBot__input" id="chat" placeholder="..." onKeyPress={this.handleKeyPress} /> }

@@ -13,6 +13,14 @@
   overflow-y: scroll;
 }
 
+.ChatBot__chat::-webkit-scrollbar {
+  width: 4px;
+}
+
+.ChatBot__chat::-webkit-scrollbar-thumb {
+  background: #ccc;
+}
+
 .ChatBot__form {
   height: 50px;
   width: 100%;
