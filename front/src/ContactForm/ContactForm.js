@@ -26,6 +26,9 @@ const ContactForm = ({currentParams}) => (
         ))
       }
     </ul>
+    <div className="ContactForm__line ContactForm__validation">
+      <button className="ContactForm__validationButton">Confirm</button>
+    </div>
   </div>
 );
 
