@@ -17,7 +17,7 @@ class SuggestForm extends Component {
       this.state = {
         email: null,
         currentParams: {},
-        paramStars: {},
+        paramsStars: {},
         loading: true,
       };
     }
@@ -29,10 +29,11 @@ class SuggestForm extends Component {
           .then((response) => {
             this.setState({
               currentParams: response.data ? response.data.currentParams : {},
-              paramStars: response.data ? response.data.paramStars : {},
+              paramsStars: response.data ? response.data.paramsStars : {},
               email: response.data ? response.data.email : null,
               loading: false,
-            })
+            });
+            if(response.data) clearInterval(this.interval)
           });
         });
       }, 2000);
@@ -59,7 +60,7 @@ class SuggestForm extends Component {
             { Object.keys(this.state.currentParams).map(key => (
                 <li className="SuggestForm__criteria">
                   <span className="SuggestForm__tag">{interpolate(paramsMapping[key], { [key] : this.state.currentParams[key] })}</span>
-                  <span className="SuggestForm__star"><Star starKey={key}/></span>
+                  <span className="SuggestForm__star"><Star starKey={key} value={this.state.paramsStars[key]}/></span>
                 </li>
               ))
             }
