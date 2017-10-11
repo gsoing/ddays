@@ -96,6 +96,9 @@ public class ElasticService {
             result = stringBuilder.toString();
         }
 
+        if (result.endsWith("q=")) {
+            result += "*";
+        }
         return result;
     }
 
