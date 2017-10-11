@@ -22,4 +22,9 @@ public class VehicleDto {
     private String images;
     private int pollution;
     private String type;
+    private int children;
+    private String use;
+    private boolean ecolo;
+    private int hobby;
+    private String city;
 }

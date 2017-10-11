@@ -45,10 +45,9 @@ public class ImportApplication implements CommandLineRunner {
     @Autowired
     private ObjectMapper objectMapper;
 
-
-    Resource[] loadResources(String pattern) throws IOException {
-        return ResourcePatternUtils.getResourcePatternResolver(resourceLoader).getResources(pattern);
-    }
+	Resource[] loadResources(String pattern) throws IOException {
+		return ResourcePatternUtils.getResourcePatternResolver(resourceLoader).getResources(pattern);
+	}
 
     @Override
     public void run(String... args) throws Exception {
@@ -60,7 +59,8 @@ public class ImportApplication implements CommandLineRunner {
 
         Arrays.stream(resources).forEach(resource -> {
             try {
-                processFile(resource, httpHeaders);
+				System.out.println(resource.getFilename());
+				processFile(resource, httpHeaders);
             } catch (Exception e) {
               log.error("error processing file", e);
             }
@@ -70,10 +70,12 @@ public class ImportApplication implements CommandLineRunner {
     private void processFile(Resource resource, HttpHeaders httpHeaders) throws Exception {
 
         String url = "http://" + elastiSearchHost + ":" + elasticSearchPort + indexName+"/vehicle/";
-        List<VehicleDto> list = objectMapper.readValue(resource.getInputStream(), objectMapper.getTypeFactory()
+        List<VehicleDto> vehicleDtoList = objectMapper.readValue(resource.getInputStream(), objectMapper.getTypeFactory()
                 .constructCollectionType(List.class, VehicleDto.class));
 
-        list.stream().forEach(vehicleDto -> {
+		mapVehiclesWithCriteria(vehicleDtoList);
+
+        vehicleDtoList.parallelStream().forEach(vehicleDto -> {
             HttpEntity<VehicleDto> request = new HttpEntity<>(vehicleDto, httpHeaders);
             restTemplate.exchange(url + vehicleDto.getVin(), HttpMethod.PUT, request, VehicleDto.class);
         });
@@ -86,4 +88,143 @@ public class ImportApplication implements CommandLineRunner {
     public static void main(String[] args) {
         SpringApplication.run(ImportApplication.class, "--debug").close();
     }
+
+
+	// Map vehicles with new criteria
+	void mapVehiclesWithCriteria(List<VehicleDto> vehicles) {
+		for(VehicleDto vehicle : vehicles) {
+			//TODO : mettre le type du dto vehicule à la place de Object
+			switch (vehicle.getModelLabel().toUpperCase()) {
+				case "CAPTUR" :
+					vehicle.setChildren(2);
+					vehicle.setUse("hobby");
+					vehicle.setEcolo(false);
+					vehicle.setCity("city");
+					vehicle.setHobby(0);
+					break;
+				case "CLIO" :
+					vehicle.setChildren(2);
+					vehicle.setUse("daily");
+					vehicle.setEcolo(false);
+					vehicle.setCity("city");
+					vehicle.setHobby(0);
+					break;
+				case "CLIO ESTATE" :
+					vehicle.setChildren(2);
+					vehicle.setUse("daily");
+					vehicle.setEcolo(false);
+					vehicle.setCity("city");
+					vehicle.setHobby(1);
+					break;
+				case "GRAND SCENIC" :
+					vehicle.setChildren(6);
+					vehicle.setUse("hobby");
+					vehicle.setEcolo(false);
+					vehicle.setCity("city");
+					vehicle.setHobby(1);
+					break;
+				case "KADJAR" :
+					vehicle.setChildren(3);
+					vehicle.setUse("hobby");
+					vehicle.setEcolo(false);
+					vehicle.setCity("countryside");
+					vehicle.setHobby(1);
+					break;
+				case "KANGOO VP" :
+				case "NOUVEAU TRAFIC COMBI" :
+					vehicle.setChildren(4);
+					vehicle.setUse("daily");
+					vehicle.setEcolo(false);
+					vehicle.setCity("countryside");
+					vehicle.setHobby(1);
+					break;
+				case "MASTER TRANSPORT DE PERSONNES" :
+					vehicle.setChildren(8);
+					vehicle.setUse("daily");
+					vehicle.setEcolo(false);
+					vehicle.setCity("countryside");
+					vehicle.setHobby(1);
+					break;
+				case "MEGANE ESTATE" :
+				case "SCENIC" :
+					vehicle.setChildren(4);
+					vehicle.setUse("daily");
+					vehicle.setEcolo(false);
+					vehicle.setCity("city");
+					vehicle.setHobby(1);
+					break;
+				case "MEGANE SOCIETE" :
+					vehicle.setChildren(0);
+					vehicle.setUse("daily");
+					vehicle.setEcolo(false);
+					vehicle.setCity("countryside");
+					vehicle.setHobby(0);
+					break;
+				case "NOUVEAU CAPTUR" :
+					vehicle.setChildren(2);
+					vehicle.setUse("hobby");
+					vehicle.setEcolo(false);
+					vehicle.setCity("city");
+					vehicle.setHobby(1);
+					break;
+				case "NOUVEAU KOLEOS" :
+					vehicle.setChildren(2);
+					vehicle.setUse("hobby");
+					vehicle.setEcolo(false);
+					vehicle.setCity("countryside");
+					vehicle.setHobby(1);
+					break;
+				case "NOUVEL ESPACE" :
+					vehicle.setChildren(5);
+					vehicle.setUse("daily");
+					vehicle.setEcolo(false);
+					vehicle.setCity("city");
+					vehicle.setHobby(1);
+					break;
+				case "NOUVELLE MEGANE BERLINE" :
+					vehicle.setChildren(2);
+					vehicle.setUse("daily");
+					vehicle.setEcolo(false);
+					vehicle.setCity("countryside");
+					vehicle.setHobby(0);
+					break;
+				case "NOUVELLE TWINGO" :
+					vehicle.setChildren(0);
+					vehicle.setUse("hobby");
+					vehicle.setEcolo(false);
+					vehicle.setCity("city");
+					vehicle.setHobby(0);
+					break;
+				case "TALISMAN" :
+					vehicle.setChildren(2);
+					vehicle.setUse("daily");
+					vehicle.setEcolo(false);
+					vehicle.setCity("countryside");
+					vehicle.setHobby(1);
+					break;
+				case "TALISMAN Estate" :
+					vehicle.setChildren(3);
+					vehicle.setUse("daily");
+					vehicle.setEcolo(false);
+					vehicle.setCity("countryside");
+					vehicle.setHobby(1);
+					break;
+				case "TWIZY" :
+					vehicle.setChildren(0);
+					vehicle.setUse("hobby");
+					vehicle.setEcolo(true);
+					vehicle.setCity("city");
+					vehicle.setHobby(0);
+					break;
+				case "ZOE" :
+					vehicle.setChildren(1);
+					vehicle.setUse("daily");
+					vehicle.setEcolo(true);
+					vehicle.setCity("city");
+					vehicle.setHobby(0);
+					break;
+
+			}
+		}
+	}
 }
