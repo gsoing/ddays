@@ -34,14 +34,18 @@
     url('fonts/renaultLife/bold.ttf') format('truetype');
 }
 
+html {
+  font-size: 62.5%;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Renault', 'Arial', sans-serif;
 }
 
 *, *::before, *::after {
   box-sizing: border-box;
+  font-family: 'Renault', 'Arial', sans-serif;
 }
 
 
@@ -65,7 +69,6 @@ body {
 
 .Layout__ResultPage {
   width: 60%;
-  padding: 32px;
   overflow-y: scroll;
 }
 

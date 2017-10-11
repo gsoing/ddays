@@ -1,0 +1,64 @@
+.ContactForm {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+  margin: auto;
+}
+
+.ContactForm__line {
+  flex-direction: row;
+  width: 100%;
+  margin-top: 10px;
+  font-size: 1.4rem;
+}
+
+.ContactFrom__email {
+}
+
+.ContactForm__emailLabel {
+
+}
+
+.ContactForm__emailInput {
+  margin-left: 10px;
+  min-width: 200px;
+  padding: 8px;
+}
+
+.ContactForm__criteriasTitle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ContactForm__criterias {
+  width: 100%;
+  padding: 0;
+  font-size: 1.4rem;
+}
+
+.ContactForm__criteria {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  margin: 8px 0;
+  justify-content: space-between;
+}
+
+.ContactForm__criteria > span {
+  flex: 1;
+}
+
+.ContactForm__tag {
+  position: relative;
+  display: inline-block;
+  background-color: #e6e6ec;
+  padding: 4px 8px;
+  color: #777f91;
+  border-radius: 8px;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
