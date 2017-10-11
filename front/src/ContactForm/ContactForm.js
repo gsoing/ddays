@@ -1,6 +1,6 @@
 import React from 'react';
 import interpolate from '../utils';
-import paramsMapping from '../constants';
+import { paramsMapping } from '../constants';
 import Star from '../Star/Star';
 
 import './ContactForm.css';
