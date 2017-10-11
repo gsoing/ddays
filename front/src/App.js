@@ -17,7 +17,7 @@ class App extends Component {
     this.state = {
       currentParams: [],
       vehicles: [],
-      total: null,
+      total: 0,
       loading: true,
       sessionId: Math.random().toString(36).substring(2, 15),
     };
@@ -46,7 +46,7 @@ class App extends Component {
   }
 
   render() {
-    const { vehicles, currentParams, loading } = this.state;
+    const { vehicles, currentParams, loading, total} = this.state;
     return (
       <div className="App">
         <FunnelHeader title="DDays 2017" />
@@ -57,6 +57,7 @@ class App extends Component {
               vehicles={vehicles}
               currentParams={currentParams}
               loading={loading}
+              total={total}
             />
           </div>
         </div>

@@ -5,13 +5,20 @@ import Loader from '../Loader/Loader';
 
 import './ResultPage.css';
 
-const ResultPage = ({ vehicles, currentParams, loading }) => {
+const ResultPage = ({ vehicles, currentParams, loading, total }) => {
   const classNames = loading ? "ResultPage__wrapper ResultPage__wrapper--loading" : "ResultPage__wrapper";
   return (
     <div className="ResultPage">
       <Loader loading={loading} />
       <div className={classNames}>
-        <Tags currentParams={currentParams} />
+        <div className="ResultPage__header">
+          <div className="ResultPage__tags">
+            <Tags currentParams={currentParams} />
+          </div>
+          <div className="ResultPage__total">
+            {total} vehicles
+          </div>
+        </div>
         <div className="ResultPage__list">
           {
             vehicles.map(vehicle => (
