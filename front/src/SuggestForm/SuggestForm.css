@@ -1,0 +1,94 @@
+.SuggestForm {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 75%;
+  margin: auto;
+}
+
+.SuggestForm__title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.SuggestForm__line {
+  width: 100%;
+  margin-top: 10px;
+  font-size: 1.6rem;
+}
+
+.ContactFrom__email {
+  display: flex;
+  flex-direction: column;
+}
+
+.SuggestForm__emailLabel {
+  text-align: left;
+  margin-bottom: 8px;
+
+}
+
+.SuggestForm__emailInput {
+  margin-left: 10px;
+  min-width: 200px;
+  padding: 8px;
+  margin-bottom: 8px;
+  font-size: 1.6rem;
+}
+
+.SuggestForm__criteriasTitle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.SuggestForm__criterias {
+  width: 100%;
+  padding: 0;
+  font-size: 1.4rem;
+}
+
+.SuggestForm__validation {
+  margin-bottom: 200px;
+}
+
+.SuggestForm__validationButton {
+  background: #ffce33;
+  font-size: 1.7rem;
+  border: none;
+  padding: 16px;
+  font-weight: bold;
+  padding: 16px 64px;
+  cursor: pointer;
+}
+
+.SuggestForm__criteria {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  margin: 8px 0;
+  justify-content: space-between;
+}
+.SuggestForm__line > span {
+  flex: 1;
+}
+
+.SuggestForm__tag {
+  position: relative;
+  display: inline-block;
+  background-color: #e6e6ec;
+  padding: 4px 8px;
+  color: #777f91;
+  border-radius: 8px;
+  text-transform: uppercase;
+  line-height: 1.4;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.SuggestForm__star {
+  flex: 1;
+}

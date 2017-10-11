@@ -5,7 +5,7 @@ import Loader from '../Loader/Loader';
 
 import './ResultPage.css';
 
-const ResultPage = ({ vehicles, currentParams, loading, total }) => {
+const ResultPage = ({ vehicles, currentParams, loading, total, isDealer = false }) => {
   const classNames = loading ? "ResultPage__wrapper ResultPage__wrapper--loading" : "ResultPage__wrapper";
   return (
     <div className="ResultPage">
@@ -13,7 +13,8 @@ const ResultPage = ({ vehicles, currentParams, loading, total }) => {
       <div className={classNames}>
         <div className="ResultPage__header">
           <div className="ResultPage__tags">
-            <Tags currentParams={currentParams} />
+            {!isDealer && <Tags currentParams={currentParams} />}
+            {isDealer && <span className="ResultPage__title">Your stock</span>}
           </div>
           <div className="ResultPage__total">
             {total} vehicles
@@ -23,7 +24,7 @@ const ResultPage = ({ vehicles, currentParams, loading, total }) => {
           {
             vehicles.map(vehicle => (
               <div className="ResultPage__listItem">
-                <VehicleItem vehicle={vehicle} />
+                <VehicleItem vehicle={vehicle} isDealer={isDealer} />
               </div>
             ))
           }{

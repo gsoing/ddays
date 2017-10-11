@@ -1,28 +1,31 @@
-.App {
-  text-align: center;
+
+.Layout {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 60px);
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+@media (min-width: 670px) {
+  .Layout {
+    height: calc(100vh - 70px);
+  }
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.Layout__ChatBot {
+  width: 40%;
+  background-color: #f9f9fb;
+  border-right: 1px solid #e6e6ec;
 }
 
-.App-title {
-  font-size: 1.5em;
+.Layout__ResultPage {
+  width: 60%;
+  overflow-y: scroll;
 }
 
-.App-intro {
-  font-size: large;
+.Layout__ResultPage::-webkit-scrollbar {
+  width: 4px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.Layout__ResultPage::-webkit-scrollbar-thumb {
+  background: #ccc;
 }
