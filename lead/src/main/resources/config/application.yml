@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ddays
+    username: lead
+    password: lead
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
+
+flyway:
+  enabled: true
+  locations: classpath:db/migration
+  password : lead
+  url :  jdbc:postgresql://localhost:5432/ddays
+  user: lead

@@ -1,29 +1,31 @@
 .VehicleItem {
     background-color: #fff;
     border-radius: 3px;
-    box-shadow: 0 0 5px 0 #e6e6ec; 
+    box-shadow: 0 0 5px 0 #e6e6ec;
     text-align: left;
     width: 100%;
+    position: relative;
 }
 
 .VehicleItem__pictureBox {
     position: relative;
     padding-top: 75%;
-    width: 100%;         
+    width: 100%;
 }
 
 .VehicleItem__picture {
     position: absolute;
-    width: 100%;  
+    width: 100%;
     top: 0;
 }
 
 .VehicleItem__vehicleType {
     background-color: #ffce33;
-    padding: 8px;
+    padding: 8px 16px;
     position: absolute;
     top: 10px;
-    right: -3px;
+    right: -5px;
+    border-radius: 0 3px 3px 0;
     font-size: 1.2rem;
     font-weight: bold;
 }
@@ -72,7 +74,7 @@
     height: 100%;
     background: #777f91;
 }
-    
+
 .VehicleItem__info:first-of-type {
     padding-left: 0;
 }
@@ -92,12 +94,36 @@
     margin: 0 0 8px;
   }
 
+
+
+.VehicleItem__choose {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+.VehicleItem:hover > .VehicleItem__choose {
+  display: block;
+}
+
+
 .VehicleItem__chooseButton {
-    width: 100%;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
     background-color: #ffce33;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     border: none;
     padding: 16px;
-    box-shadow: 0 0 5px 0 #e6e6ec; 
     font-weight: bold;
+    cursor: pointer;
 }
