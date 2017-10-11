@@ -9,6 +9,10 @@
   margin: auto;
 }
 
+.ContactForm__full {
+  width: 99%;
+}
+
 .ContactForm__title {
   font-size: 2.5rem;
   font-weight: bold;
@@ -56,6 +60,21 @@
   padding: 8px;
   margin-bottom: 8px;
   font-size: 1.6rem;
+}
+
+.ContactForm__details {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.ContactForm__vehicle {
+  margin-right: 16px;
+}
+
+.ContactForm__webcam {
+  width: 70%;
 }
 
 .ContactForm__criteriasTitle {

@@ -5,7 +5,7 @@ var Express = require('express'),
 var app = Express();
 var server = Http.Server(app);
 
-server.listen(3001,'localhost',function(){
+server.listen(3001,'0.0.0.0',function(){
     console.log('Serveur listening on http://%s:%s', server.address().address,server.address().port);
 });
 
