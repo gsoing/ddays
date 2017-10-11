@@ -14,7 +14,7 @@ const QUESTIONS = [
     question: "Are you looking for your principal car or your secondary car ?",
     context: "TODO2"
   },
-  /*{
+  {
     question: "Do you have children ?",
     context: "TODO3"
   },
@@ -29,7 +29,7 @@ const QUESTIONS = [
   {
     question: "Are you in a hurry for having your car?",
     context: "TODO6"
-  }*/
+  }
 ];
 
 const LASTQUESTION = {
@@ -90,34 +90,53 @@ class ChatBot extends Component {
     }
 
     handleKeyPress = (event) => {
-      if(event.key == 'Enter' && event.target.value !== ''){
+      const lastAnswer = event.target.value;
+      if(event.key == 'Enter' && lastAnswer !== ''){
         console.log('enter press here! ', event.target.value)
 
         const { questions, question } = this.getRandomQuestion();
         if (this.props.handleNewAnswer) {
           console.log(this.state)
-          this.props.handleNewAnswer({lastAnswer: event.target.value, context: this.state.currentQuestion.context});
+          this.props.handleNewAnswer({lastAnswer: lastAnswer, context: this.state.currentQuestion.context});
         }
 
         const answer = {
-          entry: event.target.value,
+          entry: lastAnswer,
           isBot: false,
         }
 
         this.addEntry(false, answer, null, () => {
-          if(this.state.currentQuestion.context !== LASTQUESTION2.context) {
+          if(this.state.currentQuestion.context === LASTQUESTION.context && lastAnswer.toUpperCase().indexOf('YES') > -1) {
+            this.setState({
+                items: [...this.state.items, {
+                  entry: "Cool !",
+                  isBot: true,
+                }],
+                isInputVisible: false,
+              });
+          }
+          else if(this.state.currentQuestion.context === LASTQUESTION2.context && lastAnswer.toUpperCase().indexOf('NO') > -1) {
+            this.setState({
+                items: [...this.state.items, {
+                  entry: "Sorry !",
+                  isBot: true,
+                }],
+                isInputVisible: false,
+              });
+          }
+          else if(this.state.currentQuestion.context !== LASTQUESTION2.context) {
             setTimeout(
               () => { this.addEntry(true, question, questions, () => true) },
               500,
             );
           } else {
-            this.setState({ isInputVisible: false }, () => this.setState(
-              {
-                items: [...this.state.items, {
-                  entry: "Sorry !",
-                  isBot: true,
-                }],
-              }));
+            this.setState({
+              items: [...this.state.items, {
+                entry: "Could you fill the form please, you'll be contact as soon as possible",
+                isBot: true,
+              }],
+              isInputVisible: false,
+            });
           }
          } )
 

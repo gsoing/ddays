@@ -5,11 +5,12 @@
 }
 
 .ChatBot__chat {
-  margin: 32px 16px;
+  padding: 32px 16px;
   display: flex;
   flex-direction: column;
   flex: 1;
   height: calc(100% - 5Opx);
+  overflow-y: scroll;
 }
 
 .ChatBot__form {
