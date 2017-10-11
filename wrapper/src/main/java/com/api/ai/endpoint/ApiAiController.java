@@ -1,5 +1,6 @@
 package com.api.ai.endpoint;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,11 +9,16 @@ import java.util.List;
 import com.api.ai.dto.AiApiRequestDto;
 import com.api.ai.dto.AiApiResponse;
 import com.api.ai.dto.FrontRequest;
+import com.api.ai.dto.FrontResponse;
+import com.api.ai.dto.VehicleDto;
+import com.api.ai.service.ElasticService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,33 +35,43 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class ApiAiController {
 
     private static final String API_KEY = "51a68d28275d436fb78dd0f5571d1403";
+    @Autowired
+    private ElasticService elasticService;
 
 
+    @CrossOrigin("*")
     @PostMapping("/chatBot")
-    public AiApiResponse getResponse(@RequestBody FrontRequest frontRequest) {
+    public FrontResponse getResponse(@RequestBody(required = false) FrontRequest frontRequest) throws IOException {
 
         if (StringUtils.isEmpty(frontRequest.getLastAnswer())) {
-           //Just call index
+            return elasticService.getAllVehicle(frontRequest.getCurrentParams());
         }
 
-        URI url = buildUrlFromRequest(frontRequest);
+        HashMap<String, Object> mergedMap = new HashMap<>();
         RestTemplate restTemplate = new RestTemplate();
+        URI url = buildUrlFromRequest(frontRequest);
 
-        HttpEntity<AiApiRequestDto> entity = new HttpEntity<>(AiApiRequestDto
+        HttpEntity<AiApiRequestDto> entity = buildRequestEntity(frontRequest);
+        AiApiResponse response = restTemplate.exchange(url, HttpMethod.POST, entity, AiApiResponse.class).getBody();
+
+        if (frontRequest.getCurrentParams() != null) {
+            mergedMap.putAll(frontRequest.getCurrentParams());
+        }
+        if (response.getResult().getParameters() != null) {
+            mergedMap.putAll(response.getResult().getParameters());
+        }
+
+        return elasticService.getVehicleFromParams(mergedMap);
+    }
+
+
+    private HttpEntity<AiApiRequestDto> buildRequestEntity(FrontRequest frontRequest) {
+        return new HttpEntity<>(AiApiRequestDto
                 .builder()
                 .query(frontRequest.getLastAnswer())
                 .sessionId(frontRequest.getSessionId())
                 .contexts(convertToArray(frontRequest.getContext()))
                 .build(), setHeaders());
-
-
-        AiApiResponse response = null;
-        response = restTemplate.exchange(url, HttpMethod.POST, entity, AiApiResponse.class).getBody();
-
-        //Call elastic service
-
-        //return a FrontResponse Object
-        return response;
     }
 
     private List<HashMap<String, Object>> convertToArray(String value) {
@@ -65,7 +81,6 @@ public class ApiAiController {
         mapList.add(map);
         return mapList;
     }
-
 
     private HttpHeaders setHeaders() {
         //Init headers
@@ -82,6 +97,5 @@ public class ApiAiController {
                 .encode()
                 .toUri();
     }
-
 
 }

@@ -21,7 +21,7 @@ public class AiApiResponse {
     
     private Result result;
     private HashMap<String,Object> metadata;
-    private HashMap<String,Object> contexts;
+    private List<HashMap<String,Object>> contexts;
 
 
     @Data
