@@ -1,5 +1,5 @@
 import React from 'react';
-import paramsMapping from '../constants';
+import { paramsMapping } from '../constants';
 import interpolate from '../utils';
 
 import './Tags.css';

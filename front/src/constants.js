@@ -5,4 +5,7 @@ const paramsMapping = {
   ecolo: "ecolo",
 };
 
-export default paramsMapping;
+const urlapi = 'http://localhost:3003/api/test';
+//const urlapi = 'http://10.187.247.15:8080/wrapper/chatBot';
+
+export {paramsMapping, urlapi};

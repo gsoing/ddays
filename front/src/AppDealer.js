@@ -6,6 +6,7 @@ import FunnelHeader from './FunnelHeader/FunnelHeader';
 import ChatBot from './ChatBot/ChatBot';
 import ResultPage from './ResultPage/ResultPage';
 import ContactForm from './ContactForm/ContactForm';
+import { urlapi } from './constants';
 
 class AppDealer extends Component {
 
@@ -30,13 +31,15 @@ class AppDealer extends Component {
       lastAnswer: undefined,
       context: undefined,
       sessionId : this.state.sessionId,
-      currentParams: this.state.currentParams,
+      currentParams: this.state.currentParams.length ? this.state.currentParams : undefined,
     };
     this.setState({loading: true}, () => {
-      axios.post('http://localhost:3003/api/test', payload)
+      axios.post(urlapi, payload)
       .then((response) => {
         this.setState({
-          ...response.data,
+          currentParams: response.data.currentParams || [],
+          total: response.data.total || 0,
+          vehicles: response.data.vehicles || [],
           loading: false,
         })
       });

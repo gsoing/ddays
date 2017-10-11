@@ -24,7 +24,7 @@ const ResultPage = ({ vehicles, currentParams, loading, total, isDealer = false 
           {
             vehicles.map(vehicle => (
               <div className="ResultPage__listItem">
-                <VehicleItem vehicle={vehicle} />
+                <VehicleItem vehicle={vehicle} isDealer={isDealer} />
               </div>
             ))
           }{
