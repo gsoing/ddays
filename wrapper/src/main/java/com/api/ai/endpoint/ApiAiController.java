@@ -11,11 +11,13 @@ import com.api.ai.dto.AiApiResponse;
 import com.api.ai.dto.FrontRequest;
 import com.api.ai.dto.FrontResponse;
 import com.api.ai.service.ElasticService;
+import javafx.util.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,17 +66,27 @@ public class ApiAiController {
         }
 
         System.out.println(mergedMap);
-        return elasticService.getVehicleFromParams(mergedMap);
+
+        FrontResponse frontResponse = FrontResponse.builder().build();
+        if (CollectionUtils.isEmpty(mergedMap)) {
+            frontResponse = elasticService.getAllVehicle(mergedMap);
+        } else {
+            frontResponse = elasticService.getVehicleFromParams(mergedMap);
+        }
+        return frontResponse;
     }
 
 
     private HttpEntity<AiApiRequestDto> buildRequestEntity(FrontRequest frontRequest) {
-        return new HttpEntity<>(AiApiRequestDto
+        AiApiRequestDto requestDto = AiApiRequestDto
                 .builder()
                 .query(frontRequest.getLastAnswer())
                 .sessionId(frontRequest.getSessionId())
                 .contexts(convertToArray(frontRequest.getContext()))
-                .build(), setHeaders());
+                .build();
+
+        System.out.println("Resquest to AiAPi : " + requestDto);
+        return new HttpEntity<>(requestDto, setHeaders());
     }
 
     private List<HashMap<String, Object>> convertToArray(String value) {

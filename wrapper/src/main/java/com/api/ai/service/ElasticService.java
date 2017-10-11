@@ -49,22 +49,20 @@ public class ElasticService {
     public FrontResponse getVehicleFromParams(HashMap<String, Object> params) throws IOException {
         List<VehicleDto> vehicles = new ArrayList<>();
         int total = 0;
-        if (!CollectionUtils.isEmpty(params)) {
 
-            RestTemplate restTemplate = new RestTemplate();
-            ObjectMapper mapper = new ObjectMapper();
+        RestTemplate restTemplate = new RestTemplate();
+        ObjectMapper mapper = new ObjectMapper();
 
-            String val = restTemplate.getForObject(URL + "?q=" + buildUrl(params), String.class);
-            System.out.print(URL + "?q=" + buildUrl(params));
-            JsonNode node = mapper.readValue(val, JsonNode.class);
+        System.out.print(URL + "?q=" + buildUrl(params));
+        String val = restTemplate.getForObject(URL + "?q=" + buildUrl(params), String.class);
+        JsonNode node = mapper.readValue(val, JsonNode.class);
 
-            List<JsonNode> arrays = node.findValues("_source");
-            for (JsonNode jsonNode : arrays) {
-                vehicles.add(mapper.treeToValue(jsonNode, VehicleDto.class));
-            }
-
-            total = node.findValue("hits").get("total").asInt();
+        List<JsonNode> arrays = node.findValues("_source");
+        for (JsonNode jsonNode : arrays) {
+            vehicles.add(mapper.treeToValue(jsonNode, VehicleDto.class));
         }
+
+        total = node.findValue("hits").get("total").asInt();
 
         return FrontResponse.builder()
                 .vehicles(vehicles)
@@ -81,8 +79,7 @@ public class ElasticService {
                     if (authorizedParam.contains(a.getKey())) {
                         if (a.getKey().equals("children") || a.getKey().equals("hobby")) {
                             stringBuilder.append(a.getKey()).append(":").append("[" + a.getValue() + " TO *]").append(" AND ");
-                        }
-                        if (a.getKey().equals("price")) {
+                        } else if (a.getKey().equals("price")) {
                             stringBuilder.append(a.getKey()).append(":").append("[ 0 TO " + a.getValue() + "]").append(" AND ");
                         } else {
                             stringBuilder.append(a.getKey()).append(":").append(a.getValue()).append(" AND ");
@@ -91,7 +88,15 @@ public class ElasticService {
                 }
         );
         int start = stringBuilder.lastIndexOf(" AND ");
-        return stringBuilder.substring(0, start).toString();
+
+        String result;
+        if (start > 0) {
+            result = stringBuilder.substring(0, start).toString();
+        } else {
+            result = stringBuilder.toString();
+        }
+
+        return result;
     }
 
 }
