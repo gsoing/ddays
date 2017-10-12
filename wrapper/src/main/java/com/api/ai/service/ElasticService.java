@@ -53,8 +53,8 @@ public class ElasticService {
         RestTemplate restTemplate = new RestTemplate();
         ObjectMapper mapper = new ObjectMapper();
 
-        System.out.print(URL + "?q=" + buildUrl(params));
-        String val = restTemplate.getForObject(URL + "?q=" + buildUrl(params), String.class);
+        System.out.print(URL + "?q=" + buildUrl(params, URL + "?q="));
+        String val = restTemplate.getForObject(buildUrl(params, URL + "?q="), String.class);
         JsonNode node = mapper.readValue(val, JsonNode.class);
 
         List<JsonNode> arrays = node.findValues("_source");
@@ -72,7 +72,7 @@ public class ElasticService {
     }
 
 
-    private String buildUrl(HashMap<String, Object> params) {
+    private String buildUrl(HashMap<String, Object> params, String url) {
         StringBuilder stringBuilder = new StringBuilder();
         params.entrySet().stream().forEach(a ->
                 {
@@ -96,10 +96,11 @@ public class ElasticService {
             result = stringBuilder.toString();
         }
 
-        if (result.endsWith("q=")) {
-            result += "*";
+        String finalUrl = url + result;
+        if (finalUrl.endsWith("q=")) {
+            finalUrl += "*";
         }
-        return result;
+        return finalUrl;
     }
 
 }
