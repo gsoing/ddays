@@ -96,5 +96,6 @@ app.post('/suggest', function (req, res) {
     console.log('post suggest');
     console.log(req.body);
     suggest = req.body;
+    wishList = null; // clean whishlist
     res.json();
 });
