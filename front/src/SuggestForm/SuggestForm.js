@@ -5,6 +5,8 @@ import Star from '../Star/Star';
 import axios from 'axios';
 import VehicleItem from '../VehicleItem/VehicleItem';
 import Loader from '../Loader/Loader';
+import WebRtcDemo from '../WebRtcDemo/WebRtcDemo';
+
 
 import './SuggestForm.css';
 
@@ -56,7 +58,7 @@ class SuggestForm extends Component {
 
     render() {
       if(!this.state.isWhishListDisplayed) {
-        return <div className="SuggestForm"></div>;
+        return <div className="SuggestForm"><WebRtcDemo /></div>;
       } else if (!this.state.email) {
         return (<div className="SuggestForm SuggestForm__flex">
           <Loader loading />

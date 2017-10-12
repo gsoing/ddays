@@ -4,6 +4,7 @@ import axios from 'axios';
 import { paramsMapping, currentServer } from '../constants';
 import Star from '../Star/Star';
 import VehicleItem from '../VehicleItem/VehicleItem';
+import WebRtcDemo from '../WebRtcDemo/WebRtcDemo';
 
 import './ContactForm.css';
 
@@ -69,9 +70,12 @@ class ContactForm extends Component {
       return (<div className="ContactForm"><div className="ContactForm__title">Waiting for Suggest</div></div>);
     } else if (vehicle) {
       return (
-        <div>
-          <div className="ContactForm__title">Dealer : {dealerName}</div>
-          <div className="ContactForm"><VehicleItem vehicle={vehicle} /></div>
+        <div className="ContactForm ContactForm__full">
+          <div className="ContactForm__title">You received a proposition from {dealerName} !</div>
+          <div className="ContactForm__details">
+            <div className="ContactForm__vehicle"><VehicleItem vehicle={vehicle} /></div>
+            <div className="ContactForm__webcam"><WebRtcDemo height="400px" /></div>
+          </div>
         </div>
       )
     } else {

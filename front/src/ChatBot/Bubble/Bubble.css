@@ -6,10 +6,10 @@
 .Bubble__inner {
   width: 60%;
   background: #e6e6ec;
-  padding: 8px;
+  padding: 12px;
   text-align: left;
   position: relative;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   border-radius: 4px 4px 4px 0px;
 }
 
